@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tree view</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/tree.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="app">
+            <ul>
+                <tree-item :tree="treeData"></tree-item>
+            </ul>
+        </div>
+        <script type="importmap">
+            {
+                "imports": {
+                  "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+                }
+              }
+        </script>
+        <script type="module">
+            import {createApp, ref } from 'vue';
+            import TreeItem from "./js/TreeItem.js";
+
+            createApp({
+                components: {
+                    TreeItem,
+                },
+                setup(){
+                    const treeData = ref(
+                        { id: 1 , data : "My Tree" , isOpen : false , 
+                            childreens : [
+                                {id : 1 , data : "hello" ,isOpen : false , childreens : []},
+                                {id : 2 , data : "world" ,isOpen : false , childreens : []},
+                                {id : 3 , data : "child folder" ,isOpen : false , 
+                                    childreens : [
+                                        {id : 1 , data : "child folder" ,isOpen : false , 
+                                            childreens : [
+                                                {id : 1 , data : "hello" ,isOpen : false , childreens : []},
+                                                {id : 2 , data : "world" ,isOpen : false , childreens : []},
+                                            ]
+                                        },
+                                        {id : 2 , data : "hello" ,isOpen : false , childreens : []},
+                                        {id : 3 , data : "world" ,isOpen : false , childreens : []},
+                                        {id : 4 , data : "child folder" ,isOpen : false , 
+                                            childreens : [
+                                                {id : 1 , data : "hello" ,isOpen : false , childreens : []},
+                                                {id : 2 , data : "world" ,isOpen : false , childreens : []},
+                                            ]
+                                        } 
+                                    ]
+                                }
+            
+                        ]});
+
+
+                    return {
+                        treeData,
+                    };
+                }
+            }).mount("#app");
+        </script>
+    </body>
+</html>
